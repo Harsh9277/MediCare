@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Mediterranean Diet: Benefits and Meal Ideas - MediCare Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #0dcaf0;
+            --dark-color: #212529;
+            --light-color: #f8f9fa;
+            --danger-color: #dc3545;
+            --success-color: #198754;
+            --warning-color: #ffc107;
+            --info-color: #0dcaf0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px; /* Narrower container for blog readability */
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(13, 202, 240, 0.4);
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 15px 0;
+            background-color: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Blog Header */
+        .blog-header {
+            padding-top: 150px;
+            padding-bottom: 40px;
+            text-align: center;
+        }
+        .blog-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+        .blog-meta {
+            color: #666;
+            font-size: 1rem;
+        }
+        .blog-meta span {
+            margin: 0 10px;
+        }
+        .blog-meta i {
+            margin-right: 5px;
+        }
+
+        /* Blog Content */
+        .blog-content-section {
+            padding-top: 0;
+        }
+        .blog-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        .blog-post {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        .blog-post h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .blog-post h3 {
+            font-size: 1.4rem;
+            color: var(--dark-color);
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .blog-post h2 .fa-icon {
+            margin-right: 15px;
+            color: var(--secondary-color);
+        }
+        .blog-post p, .blog-post li {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .blog-post ul {
+            list-style-type: '🥗';
+            padding-left: 20px;
+        }
+        .blog-post li {
+            padding-left: 10px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+            padding: 40px;
+            margin-top: 50px;
+        }
+        .cta-section h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 80px 0 0;
+        }
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        .footer-col h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+        .footer-col p, .footer-links a {
+            color: #bbb;
+            line-height: 1.6;
+        }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 15px; }
+        .footer-links a { text-decoration: none; transition: all 0.3s ease; }
+        .footer-links a:hover { color: var(--secondary-color); padding-left: 5px; }
+        .footer-bottom { background: rgba(0, 0, 0, 0.2); padding: 20px 0; text-align: center; }
+        .footer-bottom p { margin: 0; color: #bbb; font-size: 0.9rem; }
+        .footer-bottom a { color: var(--secondary-color); text-decoration: none; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            /* Existing Rules */
+            .nav-links { display: none; } /* A hamburger menu would be needed for full functionality */
+            .blog-header h1 { font-size: 2.2rem; }
+            .blog-post { padding: 25px; }
+            
+            /* Added Rules for Better Responsiveness */
+            section {
+                padding: 60px 0; /* Adjust section padding */
+            }
+            .header-container {
+                padding: 0 15px;
+            }
+            .logo h1 {
+                font-size: 1.6rem; /* Make logo text smaller */
+            }
+            .blog-header {
+                padding-top: 120px; /* Reduce space above title */
+                padding-bottom: 30px;
+            }
+            .blog-meta span {
+                display: block; /* Stack author and date */
+                margin: 8px 0;
+            }
+            .blog-post h2 {
+                font-size: 1.6rem; /* Adjust subheading size */
+            }
+            .blog-post h3 {
+                font-size: 1.2rem; /* Adjust smaller heading size */
+            }
+            .blog-post p, .blog-post li {
+                font-size: 1rem; /* Improve paragraph readability */
+                line-height: 1.7;
+            }
+            .cta-section {
+                padding: 30px 20px; /* Adjust CTA padding */
+            }
+            .cta-section h3 {
+                font-size: 1.5rem;
+            }
+            .cta-section p {
+                font-size: 1rem;
+            }
+            .footer-col {
+                text-align: center; /* Center footer columns when stacked */
+            }
+            .footer-col h3::after {
+                left: 50%; /* Center the underline on headings */
+                transform: translateX(-50%);
+            }
+        }
+        
+        /* Added for smaller mobile devices */
+        @media (max-width: 480px) {
+            .blog-header h1 {
+                font-size: 1.8rem; /* Further reduce main title size */
+                line-height: 1.3;
+            }
+            .btn {
+                padding: 10px 24px; /* Make button smaller */
+                font-size: 0.9rem;
+            }
+            .blog-post {
+                padding: 20px 15px; /* Adjust post padding */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <h1>MediCare</h1>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="doctors.html">Doctors</a></li>
+                    <li><a href="blog.html" class="active">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="blog-header">
+            <div class="container">
+                <h1>The Mediterranean Diet: Benefits and Meal Ideas</h1>
+                <div class="blog-meta">
+                    <span><i class="fas fa-user-md"></i> By Sarah Chen, Registered Dietitian</span>
+                    <span><i class="fas fa-calendar-alt"></i> August 22, 2025</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="blog-content-section">
+            <div class="container">
+                <div class="blog-post">
+                    <img src="https://images.unsplash.com/photo-1540420773420-2850a43d234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="A colorful spread of Mediterranean food" class="blog-image">
+                    
+                    <p>Often hailed as one of the healthiest eating patterns in the world, the Mediterranean diet is more than just a diet—it's a lifestyle. Inspired by the traditional cuisines of countries like Greece, Italy, and Spain, this way of eating is rich in fresh, vibrant foods and has been linked to numerous health benefits. Let's explore what makes it so powerful and how you can easily incorporate it into your life.</p>
+
+                    <h2><i class="fas fa-heart-pulse fa-icon"></i>Key Benefits of the Mediterranean Diet</h2>
+                    <p>This diet is consistently linked with a lower risk of chronic diseases and improved overall health. Key benefits include:</p>
+                    <ul>
+                        <li><strong>Improved Heart Health:</strong> It's famously good for your heart, helping to lower blood pressure, reduce bad cholesterol (LDL), and decrease the risk of heart disease and stroke.</li>
+                        <li><strong>Enhanced Brain Function:</strong> The abundance of antioxidants and healthy fats supports brain health, potentially lowering the risk of cognitive decline and Alzheimer's disease.</li>
+                        <li><strong>Healthy Weight Management:</strong> By focusing on nutrient-dense, filling foods like fiber and protein, it can help you feel satisfied and maintain a healthy weight without feeling deprived.</li>
+                        <li><strong>Reduced Inflammation:</strong> The diet is rich in anti-inflammatory compounds from olive oil, nuts, fish, and vegetables, which can help combat chronic inflammation in the body.</li>
+                    </ul>
+
+                    <h2><i class="fas fa-utensils fa-icon"></i>Simple Mediterranean Meal Ideas</h2>
+                    <p>Adopting this lifestyle is delicious and straightforward. The focus is on whole foods: vegetables, fruits, nuts, seeds, legumes, whole grains, fish, and healthy fats like olive oil. Here are some simple ideas to get you started:</p>
+                    
+                    <h3>Breakfast</h3>
+                    <ul>
+                        <li>Greek yogurt with fresh berries, a sprinkle of nuts, and a drizzle of honey.</li>
+                        <li>Oatmeal made with milk or water, topped with sliced almonds and figs.</li>
+                        <li>Whole-wheat toast with avocado and a sliced tomato.</li>
+                    </ul>
+
+                    <h3>Lunch</h3>
+                    <ul>
+                        <li>A large salad with mixed greens, cucumber, tomatoes, olives, feta cheese, and a lemon-olive oil vinaigrette. Top with grilled chicken or chickpeas.</li>
+                        <li>Lentil soup with a side of whole-grain bread for dipping in olive oil.</li>
+                        <li>A whole-wheat pita filled with hummus, grilled vegetables, and a sprinkle of fresh parsley.</li>
+                    </ul>
+
+                    <h3>Dinner</h3>
+                    <ul>
+                        <li>Baked salmon seasoned with herbs, served with roasted asparagus and quinoa.</li>
+                        <li>Chicken skewers with bell peppers and onions, served over a bed of brown rice.</li>
+                        <li>Whole-wheat pasta tossed with cherry tomatoes, garlic, basil, and extra virgin olive oil.</li>
+                    </ul>
+
+                    <div class="cta-section">
+                        <h3>Embrace a Healthier Lifestyle</h3>
+                        <p>Making lasting changes to your diet can be easier with expert guidance. Our registered dietitians can help you create a personalized plan that fits your needs.</p>
+                        <a href="index.html#appointment" class="btn">Book a Nutrition Consultation</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>About Us</h3>
+                <p>MediCare Hospital is a leading healthcare provider dedicated to delivering exceptional medical care with compassion and innovation.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Our Services</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Cardiology</a></li>
+                    <li><a href="#">Nutrition & Dietetics</a></li>
+                    <li><a href="#">Surgery</a></li>
+                    <li><a href="#">Ophthalmology</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+             <p>© 2025 MediCare Hospital. All Rights Reserved. | Designed by <a href="#">MediCare Team</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>

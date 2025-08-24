@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - MediCare Hospital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #0dcaf0;
+            --dark-color: #212529;
+            --light-color: #f8f9fa;
+            --danger-color: #dc3545;
+            --success-color: #198754;
+            --warning-color: #ffc107;
+            --info-color: #0dcaf0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background: var(--secondary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: underline 2s infinite alternate;
+        }
+
+        @keyframes underline {
+            0% { width: 70px; }
+            100% { width: 150px; }
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(13, 202, 240, 0.4);
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 20px 0;
+        }
+
+        header.scrolled {
+            background-color: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo svg {
+            height: 40px;
+            width: 40px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled .logo h1 {
+            color: var(--primary-color);
+        }
+        
+        header.scrolled .logo svg {
+            fill: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        header.scrolled .nav-links a {
+            color: var(--dark-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001; /* Ensure it's above the nav menu */
+        }
+
+        header.scrolled .mobile-menu-btn {
+            color: var(--dark-color);
+        }
+        
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .preloader.fade-out {
+            opacity: 0;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .preloader p {
+            color: var(--dark-color);
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+
+        /* Main Page Hero Section */
+        .hero-main {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding-top: 100px; /* Adjust for fixed header */
+        }
+        
+        .hero-main-content {
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero-main h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-main p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* About Page specific styles */
+        .about-us-section {
+            background-color: #ffffff;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-content-reverse {
+            flex-direction: row-reverse;
+        }
+
+        .about-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .feature-text h4 {
+            font-size: 1.2rem;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+        }
+
+        .feature-text p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        
+        .history-timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .history-timeline::before {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        
+        .timeline-item.left {
+            left: 0;
+            padding-right: 30px;
+            text-align: right;
+        }
+        
+        .timeline-item.right {
+            left: 50%;
+            padding-left: 30px;
+            text-align: left;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -14px;
+            background-color: white;
+            border: 4px solid var(--secondary-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item.right::after {
+            left: -14px;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .timeline-content h4 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .timeline-content p {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 80px 0 0;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+
+        .footer-col p, .footer-col li {
+            color: #bbb;
+            line-height: 1.8;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            transform: translateX(5px);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+        
+        .contact-info-list {
+            list-style: none;
+        }
+        
+        .contact-info-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .contact-info-list i {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            margin-top: 5px;
+            width: 20px;
+        }
+
+        .footer-bottom {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+             .about-content-reverse {
+                flex-direction: column;
+            }
+            .about-img {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 60px 0; /* Reduced padding for sections on mobile */
+            }
+
+            .section-title h2 {
+                font-size: 2.2rem; /* Adjusted font size */
+            }
+
+            .hero-main {
+                height: 50vh; /* Reduced hero height on mobile */
+            }
+            .hero-main h1 { 
+                font-size: 2.5rem;  /* Adjusted font size */
+            }
+
+            .about-text h3 {
+                font-size: 1.8rem; /* Adjusted font size */
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0; right: -100%;
+                width: 80%; max-width: 300px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+            }
+            .nav-links.active { right: 0; }
+            .nav-links li { margin: 20px 0; }
+            .nav-links a { color: var(--dark-color); font-size: 1.2rem; }
+            .mobile-menu-btn { display: block; }
+            .mobile-menu-btn i.close { display: none; }
+            .mobile-menu-btn.active i.open { display: none; }
+            .mobile-menu-btn.active i.close { display: block; }
+            
+            .history-timeline::before { left: 30px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item.left, .timeline-item.right { text-align: left; left: 0; }
+            .timeline-item.left::after, .timeline-item.right::after { left: 15px; }
+
+            footer {
+                padding-top: 60px;
+            }
+            .footer-col {
+                text-align: center; /* Center footer content on mobile */
+            }
+            .footer-col h3::after {
+                left: 50%;
+                transform: translateX(-50%); /* Center the underline */
+            }
+            .footer-social {
+                justify-content: center; /* Center social icons */
+            }
+            .footer-links a, .contact-info-list li {
+                justify-content: center; /* Center links and contact info */
+                text-align: center;
+            }
+            .contact-info-list i {
+                margin-top: 8px; /* Align icon better */
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px; /* Less padding on very small screens */
+            }
+            .hero-main h1 {
+                font-size: 2rem;
+            }
+            .hero-main p {
+                font-size: 1rem;
+            }
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            .section-title p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Animation Classes */
+        .animate-on-scroll { opacity: 0; transform: translateY(50px); transition: all 0.6s ease; }
+        .animate-on-scroll.animated { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+        .delay-3 { transition-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <div class="preloader">
+        <div class="loader"></div>
+        <p>Loading MediCare Hospital...</p>
+    </div>
+
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <svg viewBox="0 0 200 200" fill="#ffffff">
+                    <path d="M100 0C44.8 0 0 44.8 0 100s44.8 100 100 100 100-44.8 100-100S155.2 0 100 0zM152.8 128.6h-29.2v29.2c0 4.9-4 8.8-8.8 8.8h-29.2c-4.9 0-8.8-4-8.8-8.8v-29.2H47.2c-4.9 0-8.8-4-8.8-8.8v-29.2c0-4.9 4-8.8 8.8-8.8h29.2V52.8c0-4.9 4-8.8 8.8-8.8h29.2c4.9 0 8.8 4 8.8 8.8v29.2h29.2c4.9 0 8.8 4 8.8 8.8v29.2c0 4.8-4 8.8-8.8 8.8z"/>
+                </svg>
+                <h1>MediCare</h1>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#about-us-section">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="doctors.html">Doctors</a></li>
+                    <li><a href="departments.html">Departments</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars open"></i>
+                    <i class="fas fa-times close"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-main" id="about-hero">
+            <div class="container">
+                <div class="hero-main-content">
+                    <h1>About MediCare Hospital</h1>
+                    <p>Committed to providing compassionate and innovative healthcare solutions for a healthier community.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-us-section" id="about-us-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Story and Philosophy</h2>
+                    <p>Established in 1998, MediCare Hospital has grown to become a beacon of medical excellence. Our mission and vision guide everything we do.</p>
+                </div>
+                <div class="about-content animate-on-scroll">
+                    <div class="about-img">
+                        <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Hospital Building">
+                    </div>
+                    <div class="about-text delay-1">
+                        <h3>Our Mission</h3>
+                        <p>To provide exceptional, patient-centered healthcare with compassion, integrity, and respect. We are dedicated to advancing medical knowledge, delivering outstanding service, and improving the health of the diverse communities we serve.</p>
+                        <h3>Our Vision</h3>
+                        <p>To be the most trusted healthcare provider in the region, recognized for our clinical excellence, innovative treatments, and unwavering commitment to the well-being of our patients and their families.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-us-section" id="our-values">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Core Values</h2>
+                    <p>Our values are the foundation of our hospital's culture and guide our interactions with patients and colleagues alike.</p>
+                </div>
+                <div class="about-content about-content-reverse animate-on-scroll">
+                    <div class="about-img">
+                        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Hospital Staff">
+                    </div>
+                    <div class="about-text delay-1">
+                        <h3>Dedicated to Excellence in Care</h3>
+                        <p>Our commitment to excellence is reflected in every aspect of our practice, from the latest medical technology to our highly-trained staff. We continuously strive to set new standards in healthcare.</p>
+                        <div class="about-features">
+                            <div class="feature-item">
+                                <div class="feature-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                                <div class="feature-text"><h4>Compassion</h4><p>Treating every patient with empathy, kindness, and respect.</p></div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon"><i class="fas fa-lightbulb"></i></div>
+                                <div class="feature-text"><h4>Innovation</h4><p>Embracing new technologies and treatments to improve patient outcomes.</p></div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon"><i class="fas fa-users"></i></div>
+                                <div class="feature-text"><h4>Collaboration</h4><p>Working together as a team to provide holistic and integrated care.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="about-us-section" id="history">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Hospital's Journey</h2>
+                    <p>A look back at the key milestones that shaped MediCare Hospital into the institution it is today.</p>
+                </div>
+                <div class="history-timeline">
+                    <div class="timeline-item left animate-on-scroll">
+                        <div class="timeline-content">
+                            <h4>1998 - Founding</h4>
+                            <p>MediCare Hospital was founded with a vision for advanced and accessible community healthcare.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right animate-on-scroll delay-1">
+                        <div class="timeline-content">
+                            <h4>2005 - New Wing Opens</h4>
+                            <p>We expanded our facilities by adding a new wing dedicated to cardiology and neurology departments.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left animate-on-scroll delay-2">
+                        <div class="timeline-content">
+                            <h4>2012 - Certified Trauma Center</h4>
+                            <p>Received certification as a Level II Trauma Center, equipped to handle critical medical emergencies.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right animate-on-scroll delay-3">
+                        <div class="timeline-content">
+                            <h4>2020 - Telemedicine Launch</h4>
+                            <p>Launched our telemedicine platform to connect patients with specialists from anywhere.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>MediCare Hospital</h3>
+                    <p>A leading healthcare institution dedicated to providing exceptional medical services with compassion and innovation.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-angle-right"></i> Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-angle-right"></i> About Us</a></li>
+                        <li><a href="services.html"><i class="fas fa-angle-right"></i> Services</a></li>
+                        <li><a href="doctors.html"><i class="fas fa-angle-right"></i> Our Doctors</a></li>
+                        <li><a href="blog_health.html"><i class="fas fa-angle-right"></i> Health Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Medical College Road, Gorakhpur, Uttar Pradesh 273004, India</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+91-551-1234567</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@medicare-gkp.in</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>24/7 Emergency Services</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2025</span> MediCare Hospital. All Rights Reserved. | Designed by <a href="#">MediCare Team</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.querySelector('.preloader');
+            preloader.classList.add('fade-out');
+            setTimeout(() => { preloader.style.display = 'none'; }, 500);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        mobileMenuBtn.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    mobileMenuBtn.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', function() {
+            backToTopBtn.classList.toggle('active', window.pageYOffset > 300);
+        });
+        backToTopBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Animation on Scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // Offset for fixed header
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Update footer year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

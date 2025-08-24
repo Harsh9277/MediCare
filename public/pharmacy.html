@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24-Hour Pharmacy - MediCare Hospital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #0dcaf0;
+            --dark-color: #212529;
+            --light-color: #f8f9fa;
+            --danger-color: #dc3545;
+            --success-color: #198754;
+            --warning-color: #ffc107;
+            --info-color: #0dcaf0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background: var(--secondary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(13, 202, 240, 0.4);
+        }
+        
+        .btn-danger {
+            background: var(--danger-color);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+        }
+
+        .btn-danger:hover {
+            background: #e74c3c;
+            box-shadow: 0 8px 20px rgba(220, 53, 69, 0.4);
+        }
+
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 15px 0;
+            background-color: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding-top: 150px;
+            padding-bottom: 80px;
+            text-align: center;
+            background: linear-gradient(rgba(13, 110, 253, 0.8), rgba(13, 202, 240, 0.8)), url('https://images.unsplash.com/photo-1585435557343-35f9226a2130?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            color: white;
+        }
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+        }
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 15px auto 0;
+        }
+
+        /* Content Styles */
+        .pharmacy-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        .pharmacy-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+        }
+        .pharmacy-img img {
+            width: 100%;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        
+        .pharmacy-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .pharmacy-text {
+            flex: 1;
+        }
+        .pharmacy-text h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        .pharmacy-text p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .feature-item:hover .feature-icon {
+            background: var(--secondary-color);
+            transform: rotate(15deg);
+        }
+
+        .feature-text h4 {
+            font-size: 1.2rem;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+        }
+        .feature-text p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Appointment Contact Section */
+        .appointment-contact {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+            padding: 40px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .appointment-contact:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            background-color: #0b5ed7; 
+        }
+
+        .appointment-contact h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        .appointment-contact p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+        }
+        .appointment-contact .phone-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+        .appointment-contact .phone-number i {
+            margin-right: 10px;
+        }
+
+
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 80px 0 0;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+
+        .footer-col p, .footer-links a, .footer-newsletter p {
+            color: #bbb;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .pharmacy-content {
+                flex-direction: column;
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Simplified for single page */
+            .mobile-menu-btn { display: block; } /* Simplified for single page */
+            .page-header h1 { font-size: 2.5rem; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <h1>MediCare</h1>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="doctors.html">Doctors</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="Open Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>24-Hour Pharmacy</h1>
+                <p>Your trusted source for prescriptions, health products, and expert advice, available any time, day or night.</p>
+            </div>
+        </section>
+
+        <section id="pharmacy-details">
+            <div class="container">
+                <div class="pharmacy-content">
+                    <div class="pharmacy-img">
+                        <img src="https://images.unsplash.com/photo-1576092762791-a1e1e35ea289?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Pharmacist assisting a customer with medication">
+                    </div>
+                    <div class="pharmacy-text">
+                        <h3>Your Health, Any Hour</h3>
+                        <p>The MediCare Hospital Pharmacy is committed to your well-being around the clock. Our licensed pharmacists and dedicated staff are always available to fill prescriptions, offer expert advice, and help you find the over-the-counter products you need.</p>
+                        <p>We believe in accessible healthcare, which is why our doors never close. Whether it's a late-night emergency or an early-morning refill, you can count on us for prompt, professional, and compassionate service.</p>
+                        <a href="#contact" class="btn">Contact the Pharmacy</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pharmacy-features" style="background-color: white;">
+            <div class="container">
+                <div class="section-title">
+                    <h2>What We Offer</h2>
+                    <p>A comprehensive range of pharmaceutical services and products to meet all your health needs.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-pills"></i></div>
+                        <div class="feature-text">
+                            <h4>24/7 Prescription Filling</h4>
+                            <p>Fast and accurate prescription services, including new prescriptions, refills, and medication transfers.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-plus-square"></i></div>
+                        <div class="feature-text">
+                            <h4>Over-the-Counter Meds</h4>
+                            <p>A wide selection of OTC medications for pain relief, cold & flu, allergies, digestive health, and more.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-user-md"></i></div>
+                        <div class="feature-text">
+                            <h4>Pharmacist Consultations</h4>
+                            <p>Access to knowledgeable pharmacists for medication counseling and health-related questions anytime.</p>
+                        </div>
+                    </div>
+                     <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-heartbeat"></i></div>
+                        <div class="feature-text">
+                            <h4>Health & Wellness</h4>
+                            <p>A variety of vitamins, supplements, and personal care products to support a healthy lifestyle.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-band-aid"></i></div>
+                        <div class="feature-text">
+                            <h4>Medical Supplies</h4>
+                            <p>Essential first-aid items, wound care, diagnostic tools, and home healthcare equipment.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-shipping-fast"></i></div>
+                        <div class="feature-text">
+                            <h4>Home Delivery</h4>
+                            <p>Convenient and reliable home delivery service for your prescriptions and other pharmacy needs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                 <div class="appointment-contact">
+                        <h3>Contact Our Pharmacy</h3>
+                        <p>Our pharmacists are ready to assist you. Call us for refills, questions, or information.</p>
+                        <a href="tel:123-555-0102" class="phone-number">
+                            <i class="fas fa-phone-alt"></i>(123) 555-0102
+                        </a>
+                 </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>About Us</h3>
+                    <p>MediCare Hospital is a leading healthcare provider dedicated to delivering exceptional medical care with compassion and innovation.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#pharmacy-details">About Pharmacy</a></li>
+                        <li><a href="#pharmacy-features">Our Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="neuro.html">Neurology</a></li>
+                        <li><a href="surgery.html">Surgery</a></li>
+                        <li><a href="radio.html">Radiology</a></li>
+                        <li><a href="pharmacy.html">Pharmacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                 <p>© 2025 MediCare Hospital. All Rights Reserved. | Designed by <a href="#">MediCare Team</a></p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

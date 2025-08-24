@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare Hospital - Our Departments</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles from original page */
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #0dcaf0;
+            --dark-color: #212529;
+            --light-color: #f8f9fa;
+            --danger-color: #dc3545;
+            --success-color: #198754;
+            --warning-color: #ffc107;
+            --info-color: #0dcaf0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background: var(--secondary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(13, 202, 240, 0.4);
+        }
+        
+        .btn-danger {
+            background: var(--danger-color);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+            box-shadow: 0 8px 20px rgba(220, 53, 69, 0.4);
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 20px 0;
+        }
+
+        header.scrolled {
+            background-color: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--primary-color); /* Color changed for internal pages */
+            transition: all 0.3s ease;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--dark-color); /* Color changed for internal pages */
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 80px 0 0;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+
+        .footer-col p {
+            color: #bbb;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            transform: translateX(5px);
+        }
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .footer-social a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom p a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            background: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+        
+        /* Animation Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+            }
+            .nav-links.active {
+                right: 0;
+            }
+            .nav-links li {
+                margin: 15px 0;
+            }
+            .nav-links a {
+                color: var(--dark-color);
+                font-size: 1.2rem;
+            }
+            .mobile-menu-btn {
+                display: block;
+                z-index: 1001;
+            }
+            .mobile-menu-btn i.close { display: none; }
+            .mobile-menu-btn.active i.open { display: none; }
+            .mobile-menu-btn.active i.close { display: block; }
+        }
+        
+        /* NEW STYLES FOR DEPARTMENTS PAGE */
+
+        /* Page Banner */
+        .page-banner {
+            padding-top: 160px;
+            padding-bottom: 80px;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            text-align: center;
+            color: white;
+        }
+        .page-banner h1 {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        .page-banner p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* Departments Detail Section */
+        .departments-page-section {
+            background-color: #ffffff;
+        }
+
+        .department-entry {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            background: var(--light-color);
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .department-entry:last-child {
+            margin-bottom: 0;
+        }
+
+        .department-entry.reverse {
+            flex-direction: row-reverse;
+        }
+        
+        .department-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .department-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        
+        .department-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .department-details {
+            flex: 1.5;
+        }
+
+        .department-details h3 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .department-details h3 i {
+            font-size: 2rem;
+            color: var(--secondary-color);
+        }
+
+        .department-details .description {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        
+        .department-details h4 {
+            font-size: 1.3rem;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+        }
+        
+        .services-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 25px;
+        }
+
+        .services-list li {
+            color: #666;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .services-list i {
+            color: var(--success-color);
+            margin-right: 10px;
+        }
+
+        .department-doctors p {
+            font-style: italic;
+            color: #777;
+            margin-bottom: 30px;
+        }
+        
+        .emergency-contact {
+            background: rgba(220, 53, 69, 0.1);
+            border-left: 5px solid var(--danger-color);
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .emergency-contact p {
+            margin: 0;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        .emergency-contact a {
+            font-weight: 700;
+            color: var(--danger-color);
+            text-decoration: none;
+        }
+
+        @media (max-width: 992px) {
+            .department-entry, .department-entry.reverse {
+                flex-direction: column;
+                padding: 30px;
+            }
+            .department-details h3 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <header class="scrolled"> <div class="container header-container">
+            <div class="logo">
+                <h1>MediCare</h1>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="doctors.html">Doctors</a></li>
+                    <li><a href="departments.html">Departments</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars open"></i>
+                    <i class="fas fa-times close"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-banner">
+        <div class="container">
+            <h1>Our Specialized Departments</h1>
+            <p>Comprehensive care across a wide range of medical specialties.</p>
+        </div>
+    </section>
+
+    <section class="departments-page-section" id="departments">
+        <div class="container">
+            <div class="section-title">
+                <h2>Explore Our Medical Departments</h2>
+                <p>At MediCare Hospital, we house a multitude of specialized departments, each equipped with cutting-edge technology and staffed by leading experts in their fields to ensure you receive the highest standard of care.</p>
+            </div>
+            
+            <div class="department-entry animate-on-scroll">
+                <div class="department-image">
+                    <img src="https://images.unsplash.com/photo-1530026186672-2cd00ffc50fe?auto=format&fit=crop&w=1470&q=80" alt="Cardiology Department">
+                </div>
+                <div class="department-details">
+                    <h3><i class="fas fa-heartbeat"></i>Cardiology</h3>
+                    <p class="description">
+                        Our Cardiology department offers a complete spectrum of heart care, from diagnostics and preventive medicine to complex interventions. We are dedicated to managing and treating cardiovascular diseases with unparalleled expertise and compassionate care for patients of all ages.
+                    </p>
+                    <h4>Key Services</h4>
+                    <ul class="services-list">
+                        <li><i class="fas fa-check-circle"></i>Advanced Cardiac Imaging (Echocardiography, CT Angiography)</li>
+                        <li><i class="fas fa-check-circle"></i>Coronary Artery Bypass Grafting (CABG)</li>
+                        <li><i class="fas fa-check-circle"></i>Angioplasty and Stenting</li>
+                        <li><i class="fas fa-check-circle"></i>Pacemaker and ICD Implantation</li>
+                        <li><i class="fas fa-check-circle"></i>Cardiac Rehabilitation Programs</li>
+                    </ul>
+                    <div class="department-doctors">
+                        <h4>Our Specialists</h4>
+                        <p>Dr. Sarah Johnson, Dr. Emily White</p>
+                    </div>
+                    <a href="index.html#appointment" class="btn">Book an Appointment</a>
+                </div>
+            </div>
+
+            <div class="department-entry reverse animate-on-scroll delay-1">
+                <div class="department-image">
+                    <img src="https://www.bing.com/th/id/OIP.fId7fPnotJbTUh-h3lYM_QHaDY?w=269&h=211&c=8&rs=1&qlt=70&o=7&cb=thws4&dpr=1.3&pid=3.1&rm=3" alt="Neurology Department">
+                </div>
+                <div class="department-details">
+                    <h3><i class="fas fa-brain"></i>Neurology</h3>
+                    <p class="description">
+                        The Neurology department specializes in the diagnosis and treatment of disorders affecting the brain, spinal cord, and nervous system. Our team utilizes the latest diagnostic technologies to manage conditions like stroke, epilepsy, Parkinson's disease, and multiple sclerosis.
+                    </p>
+                    <h4>Key Services</h4>
+                    <ul class="services-list">
+                        <li><i class="fas fa-check-circle"></i>Comprehensive Stroke Care & Management</li>
+                        <li><i class="fas fa-check-circle"></i>EEG and Nerve Conduction Studies</li>
+                        <li><i class="fas fa-check-circle"></i>Movement Disorder Clinics</li>
+                        <li><i class="fas fa-check-circle"></i>Headache and Migraine Treatment</li>
+                        <li><i class="fas fa-check-circle"></i>Neurosurgical Consultation</li>
+                    </ul>
+                    <div class="department-doctors">
+                        <h4>Our Specialists</h4>
+                        <p>Dr. Michael Chen, Dr. David Lee</p>
+                    </div>
+                    <a href="index.html#appointment" class="btn">Book an Appointment</a>
+                </div>
+            </div>
+            
+            <div class="department-entry animate-on-scroll delay-2">
+                <div class="department-image">
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1470&q=80" alt="Orthopedics Department">
+                </div>
+                <div class="department-details">
+                    <h3><i class="fas fa-bone"></i>Orthopedics</h3>
+                    <p class="description">
+                        Our Orthopedics department provides expert care for injuries and diseases of the musculoskeletal system. From sports injuries and fractures to joint replacement surgery, our surgeons and specialists are committed to restoring function and improving your quality of life.
+                    </p>
+                    <h4>Key Services</h4>
+                    <ul class="services-list">
+                        <li><i class="fas fa-check-circle"></i>Total Knee and Hip Replacement Surgery</li>
+                        <li><i class="fas fa-check-circle"></i>Arthroscopic Surgery for Shoulder and Knee</li>
+                        <li><i class="fas fa-check-circle"></i>Spine Surgery and Deformity Correction</li>
+                        <li><i class="fas fa-check-circle"></i>Sports Medicine and Injury Rehabilitation</li>
+                        <li><i class="fas fa-check-circle"></i>Trauma and Fracture Care</li>
+                    </ul>
+                    <div class="department-doctors">
+                        <h4>Our Specialists</h4>
+                        <p>Dr. Robert Williams, Dr. Jessica Brown</p>
+                    </div>
+                    <a href="index.html#appointment" class="btn">Book an Appointment</a>
+                </div>
+            </div>
+
+            <div class="department-entry reverse animate-on-scroll">
+                <div class="department-image">
+                    <img src="https://images.unsplash.com/photo-1581595219315-a187dd40c322?auto=format&fit=crop&w=1470&q=80" alt="Pediatrics Department">
+                </div>
+                <div class="department-details">
+                    <h3><i class="fas fa-baby"></i>Pediatrics</h3>
+                    <p class="description">
+                        The Pediatrics department offers comprehensive, compassionate healthcare for infants, children, and adolescents. Our child-friendly environment and dedicated pediatricians ensure that your child receives the best possible care for routine check-ups, vaccinations, and illnesses.
+                    </p>
+                    <h4>Key Services</h4>
+                    <ul class="services-list">
+                        <li><i class="fas fa-check-circle"></i>Well-Child Visits and Immunizations</li>
+                        <li><i class="fas fa-check-circle"></i>Developmental Screenings</li>
+                        <li><i class="fas fa-check-circle"></i>Acute Illness and Injury Care</li>
+                        <li><i class="fas fa-check-circle"></i>Chronic Condition Management (e.g., Asthma, Diabetes)</li>
+                        <li><i class="fas fa-check-circle"></i>Neonatal Intensive Care Unit (NICU)</li>
+                    </ul>
+                    <div class="department-doctors">
+                        <h4>Our Specialists</h4>
+                        <p>Dr. Lisa Rodriguez, Dr. Kevin Hart</p>
+                    </div>
+                    <a href="index.html#appointment" class="btn">Book an Appointment</a>
+                </div>
+            </div>
+
+            <div class="department-entry animate-on-scroll delay-1">
+                <div class="department-image">
+                    <img src="https://images.unsplash.com/photo-1527613426441-4da17471b66d?auto=format&fit=crop&w=1470&q=80" alt="Emergency Care Department">
+                </div>
+                <div class="department-details">
+                    <h3><i class="fas fa-ambulance"></i>Emergency Care</h3>
+                    <p class="description">
+                        Our Emergency Department is open 24 hours a day, 7 days a week, staffed by board-certified emergency physicians and a dedicated team of nurses. We provide rapid, life-saving care for all critical and urgent medical conditions in a state-of-the-art trauma center.
+                    </p>
+                    <h4>Key Services</h4>
+                    <ul class="services-list">
+                        <li><i class="fas fa-check-circle"></i>24/7 Trauma and Emergency Response</li>
+                        <li><i class="fas fa-check-circle"></i>Cardiac Emergency Services (Code Blue)</li>
+                        <li><i class="fas fa-check-circle"></i>Acute Stroke Management</li>
+                        <li><i class="fas fa-check-circle"></i>Minor Injury and Illness Treatment</li>
+                        <li><i class="fas fa-check-circle"></i>Advanced Life Support Ambulances</li>
+                    </ul>
+                    <div class="emergency-contact">
+                        <p>In case of a medical emergency, please call us immediately at <a href="tel:123-456-7891">(123) 456-7891</a>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="department-entry reverse animate-on-scroll delay-2">
+                <div class="department-image">
+                    <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1470&q=80" alt="Maternity Care Department">
+                </div>
+                <div class="department-details">
+                    <h3><i class="fas fa-baby-carriage"></i>Maternity Care</h3>
+                    <p class="description">
+                        We provide a warm, supportive, and family-centered environment for expecting mothers and their newborns. Our Maternity Care unit offers comprehensive services from prenatal planning through delivery and postnatal care, ensuring the health and well-being of both mother and child.
+                    </p>
+                    <h4>Key Services</h4>
+                    <ul class="services-list">
+                        <li><i class="fas fa-check-circle"></i>Prenatal and Antenatal Care Programs</li>
+                        <li><i class="fas fa-check-circle"></i>Private Labor, Delivery, Recovery (LDR) Suites</li>
+                        <li><i class="fas fa-check-circle"></i>High-Risk Pregnancy Management</li>
+                        <li><i class="fas fa-check-circle"></i>Neonatal Intensive Care Unit (NICU)</li>
+                        <li><i class="fas fa-check-circle"></i>Lactation Consultation and Support</li>
+                    </ul>
+                     <div class="department-doctors">
+                        <h4>Our Specialists</h4>
+                        <p>Dr. Carol Hathaway, Dr. Olivia Benson</p>
+                    </div>
+                    <a href="index.html#appointment" class="btn">Book an Appointment</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>About Us</h3>
+                    <p>MediCare Hospital is a leading healthcare provider dedicated to delivering exceptional medical care with compassion and innovation since 1998.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="doctors.html">Doctors</a></li>
+                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="emergency.html">Emergency Care</a></li>
+                        <li><a href="cardiology.html">Cardiology</a></li>
+                        <li><a href="neuro.html">Neurology</a></li>
+                        <li><a href="ortho.html">Orthopedics</a></li>
+                        <li><a href="pedia.html">Pediatrics</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MediCare Hospital. All Rights Reserved. | Designed by <a href="#">MediCare Team</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    mobileMenuBtn.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.querySelector('.back-to-top');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('active');
+            } else {
+                backToTopBtn.classList.remove('active');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Animation on Scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.classList.add('animated');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        // Trigger once on page load
+        document.addEventListener('DOMContentLoaded', animateOnScroll);
+
+        // Current year for footer
+        document.querySelector('.footer-bottom p').innerHTML =
+            document.querySelector('.footer-bottom p').innerHTML.replace('2025', new Date().getFullYear());
+    </script>
+</body>
+</html>

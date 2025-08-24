@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surgery Department - MediCare Hospital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #0dcaf0;
+            --dark-color: #212529;
+            --light-color: #f8f9fa;
+            --danger-color: #dc3545;
+            --success-color: #198754;
+            --warning-color: #ffc107;
+            --info-color: #0dcaf0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background: var(--secondary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(13, 202, 240, 0.4);
+        }
+        
+        .btn-danger {
+            background: var(--danger-color);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+        }
+
+        .btn-danger:hover {
+            background: #e74c3c;
+            box-shadow: 0 8px 20px rgba(220, 53, 69, 0.4);
+        }
+
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 15px 0;
+            background-color: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding-top: 150px;
+            padding-bottom: 80px;
+            text-align: center;
+            background: linear-gradient(rgba(13, 110, 253, 0.8), rgba(13, 202, 240, 0.8)), url('https://images.unsplash.com/photo-1551501419-123a0e68c14a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            color: white;
+        }
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+        }
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 15px auto 0;
+        }
+
+        /* Content Styles */
+        .surgery-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        .surgery-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+        }
+        .surgery-img img {
+            width: 100%;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        
+        .surgery-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .surgery-text {
+            flex: 1;
+        }
+        .surgery-text h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        .surgery-text p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .feature-item:hover .feature-icon {
+            background: var(--secondary-color);
+            transform: rotate(15deg);
+        }
+
+        .feature-text h4 {
+            font-size: 1.2rem;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+        }
+        .feature-text p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Appointment Contact Section */
+        .appointment-contact {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+            padding: 40px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .appointment-contact:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            background-color: #0b5ed7; 
+        }
+
+        .appointment-contact h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        .appointment-contact p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+        }
+        .appointment-contact .phone-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+        .appointment-contact .phone-number i {
+            margin-right: 10px;
+        }
+
+
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 80px 0 0;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+
+        .footer-col p, .footer-links a, .footer-newsletter p {
+            color: #bbb;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .surgery-content {
+                flex-direction: column;
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Simplified for single page */
+            .mobile-menu-btn { display: block; } /* Simplified for single page */
+            .page-header h1 { font-size: 2.5rem; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <h1>MediCare</h1>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="doctors.html">Doctors</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="Open Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Surgery Department</h1>
+                <p>Delivering advanced surgical procedures with precision, expertise, and a commitment to patient safety and recovery.</p>
+            </div>
+        </section>
+
+        <section id="surgery-details">
+            <div class="container">
+                <div class="surgery-content">
+                    <div class="surgery-img">
+                        <img src="https://th.bing.com/th/id/R.d408abf2905a49d217018ded8dde91b8?rik=MjMwE3z9QF%2bHzg&riu=http%3a%2f%2fmedia.istockphoto.com%2fphotos%2fsurgeons-performing-surgery-on-patient-in-operating-room-picture-id535042039%3fk%3d6%26m%3d535042039%26s%3d612x612%26w%3d0%26h%3dZZW3gtJdVpS3Ot8SjZzNTgTVVgrymj4uwmj3AoohWSc%3d&ehk=AKLZC0Ks1t3m64FttVzsE%2f2DK6PJOfOwJ%2fVHSJyuVdY%3d&risl=&pid=ImgRaw&r=0" alt="Surgeons performing a procedure">
+                    </div>
+                    <div class="surgery-text">
+                        <h3>Advanced Surgical Solutions</h3>
+                        <p>The Surgery Department at MediCare Hospital provides a full range of surgical services. Our board-certified surgeons are leaders in their fields, equipped with state-of-the-art operating theaters and advanced robotic and minimally invasive technologies.</p>
+                        <p>We are committed to providing the highest standard of surgical care, focusing on patient safety, optimal outcomes, and a compassionate patient experience. From routine procedures to complex operations, our team is here for you.</p>
+                        <a href="index.html#appointment" class="btn">Schedule a Consultation</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="surgery-features" style="background-color: white;">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Surgical Specialties</h2>
+                    <p>We offer a wide range of specialized surgical procedures and techniques.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-procedures"></i></div>
+                        <div class="feature-text">
+                            <h4>General Surgery</h4>
+                            <p>Comprehensive care for abdominal issues, including hernia repair and appendectomies.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-heartbeat"></i></div>
+                        <div class="feature-text">
+                            <h4>Cardiothoracic Surgery</h4>
+                            <p>Advanced procedures for the heart, lungs, and chest, including bypass surgery.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-bone"></i></div>
+                        <div class="feature-text">
+                            <h4>Orthopedic Surgery</h4>
+                            <p>Specializing in joint replacements, sports injuries, and complex fracture care.</p>
+                        </div>
+                    </div>
+                     <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                        <div class="feature-text">
+                            <h4>Neurosurgery</h4>
+                            <p>Expert surgical treatment for disorders of the brain, spine, and nervous system.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-camera"></i></div>
+                        <div class="feature-text">
+                            <h4>Minimally Invasive Surgery</h4>
+                            <p>Laparoscopic and endoscopic techniques for faster recovery and less scarring.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                        <div class="feature-text">
+                            <h4>Robotic-Assisted Surgery</h4>
+                            <p>Utilizing the latest robotic technology for enhanced precision in complex operations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                 <div class="appointment-contact">
+                      <h3>Schedule a Surgical Consultation</h3>
+                      <p>Contact us today to book an appointment with one of our expert surgeons.</p>
+                      <a href="tel:123-456-7891" class="phone-number">
+                           <i class="fas fa-phone-alt"></i>(123) 456-7891
+                      </a>
+                 </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>About Us</h3>
+                    <p>MediCare Hospital is a leading healthcare provider dedicated to delivering exceptional medical care with compassion and innovation.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#surgery-details">About Surgery</a></li>
+                        <li><a href="#surgery-features">Our Specialties</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="emergency.html">Emergency Care</a></li>
+                        <li><a href="cardiology.html">Cardiology</a></li>
+                        <li><a href="surgery.html">Surgery</a></li>
+                        <li><a href="ortho.html">Orthopedics</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                 <p>© 2025 MediCare Hospital. All Rights Reserved. | Designed by <a href="#">MediCare Team</a></p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
