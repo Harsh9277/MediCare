@@ -543,7 +543,7 @@
             }
 
             .nav-links li {
-                margin: 15px 0;
+                margin: 20px 0;
             }
 
             .nav-links a {
@@ -555,8 +555,82 @@
                 display: block;
                 z-index: 1001;
             }
+
+            /* Added Responsive Adjustments */
+            section {
+                padding: 60px 0;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .page-header {
+                padding-top: 100px;
+                padding-bottom: 40px;
+            }
+
+            .profile-main-content h2 {
+                font-size: 1.9rem;
+            }
+
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+
+            .footer-col {
+                text-align: center;
+            }
+
+            .footer-col h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .footer-links a {
+                justify-content: center;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
         }
 
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .profile-sidebar h3 {
+                font-size: 1.5rem;
+            }
+
+            .profile-main-content h2 {
+                font-size: 1.6rem;
+            }
+
+            .btn {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+
+            .back-to-top {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
     </style>
 </head>
 <body>

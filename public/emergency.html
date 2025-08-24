@@ -130,11 +130,10 @@
             align-items: center;
         }
 
-        .logo img {
-            height: 50px;
-            margin-right: 10px;
+        .logo {
+            text-decoration: none;
         }
-
+        
         .logo h1 {
             font-size: 1.8rem;
             color: var(--primary-color);
@@ -175,6 +174,12 @@
 
         .mobile-menu-btn {
             display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            cursor: pointer;
+            z-index: 1001;
         }
 
         /* Page Header */
@@ -210,10 +215,9 @@
         .emergency-img img {
             width: 100%;
             display: block;
-            transition: transform 0.4s ease; /* <<< HOVER EFFECT ADDED */
+            transition: transform 0.4s ease;
         }
         
-        /* <<< HOVER EFFECT ADDED */
         .emergency-img:hover img {
             transform: scale(1.05);
         }
@@ -242,14 +246,13 @@
         .feature-item {
             display: flex;
             align-items: flex-start;
-            background-color: #fff; /* <<< STYLE ADDED */
-            padding: 20px; /* <<< STYLE ADDED */
-            border-radius: 10px; /* <<< STYLE ADDED */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* <<< STYLE ADDED */
-            transition: all 0.3s ease-in-out; /* <<< HOVER EFFECT ADDED */
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease-in-out;
         }
 
-        /* <<< HOVER EFFECT ADDED */
         .feature-item:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 25px rgba(0,0,0,0.1);
@@ -267,10 +270,9 @@
             font-size: 1.2rem;
             margin-right: 15px;
             flex-shrink: 0;
-            transition: all 0.3s ease-in-out; /* <<< HOVER EFFECT ADDED */
+            transition: all 0.3s ease-in-out;
         }
 
-        /* <<< HOVER EFFECT ADDED */
         .feature-item:hover .feature-icon {
             background: var(--secondary-color);
             transform: rotate(15deg);
@@ -294,11 +296,10 @@
             text-align: center;
             border-radius: 10px;
             padding: 40px;
-            transition: all 0.3s ease-in-out; /* <<< HOVER EFFECT ADDED */
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* <<< STYLE ADDED */
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
         
-        /* <<< HOVER EFFECT ADDED */
         .emergency-contact:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.3);
@@ -400,12 +401,80 @@
         @media (max-width: 992px) {
             .emergency-content {
                 flex-direction: column;
+                text-align: center;
             }
         }
         @media (max-width: 768px) {
-            .nav-links { display: none; } /* Simplified for single page */
-            .mobile-menu-btn { display: block; } /* Simplified for single page */
-            .page-header h1 { font-size: 2.5rem; }
+            section {
+                padding: 60px 0;
+            }
+            .page-header {
+                padding-top: 120px;
+                padding-bottom: 60px;
+            }
+            .page-header h1 { 
+                font-size: 2.5rem; 
+            }
+            .page-header p {
+                font-size: 1rem;
+            }
+            .emergency-text h3 {
+                font-size: 1.6rem;
+            }
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            .emergency-contact {
+                padding: 30px 20px;
+            }
+            .emergency-contact h3 {
+                font-size: 1.5rem;
+            }
+            .emergency-contact p {
+                font-size: 1rem;
+            }
+            .emergency-contact .phone-number {
+                font-size: 1.8rem;
+            }
+
+            /* Functional Mobile Nav */
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 280px;
+                background: white;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: right 0.4s ease-in-out;
+            }
+            .nav-links.active {
+                right: 0;
+            }
+            .nav-links li {
+                margin: 20px 0;
+            }
+            .nav-links a {
+                font-size: 1.2rem;
+            }
+            .mobile-menu-btn { 
+                display: block; 
+            }
+            .mobile-menu-btn .fa-times {
+                display: none;
+            }
+            .mobile-menu-btn.active .fa-bars {
+                display: none;
+            }
+            .mobile-menu-btn.active .fa-times {
+                display: block;
+            }
+            .footer-container {
+                text-align: left;
+            }
         }
 
     </style>
@@ -427,6 +496,7 @@
                 </ul>
                 <button class="mobile-menu-btn" aria-label="Open Menu">
                     <i class="fas fa-bars"></i>
+                    <i class="fas fa-times"></i>
                 </button>
             </nav>
         </div>
@@ -512,11 +582,11 @@
         <section id="contact">
             <div class="container">
                  <div class="emergency-contact">
-                     <h3>In Case of an Emergency</h3>
-                     <p>Please do not hesitate to call us immediately or visit our emergency department.</p>
-                     <a href="tel:123-456-7891" class="phone-number">
-                         <i class="fas fa-phone-alt"></i>(123) 456-7891
-                     </a>
+                      <h3>In Case of an Emergency</h3>
+                      <p>Please do not hesitate to call us immediately or visit our emergency department.</p>
+                      <a href="tel:123-456-7891" class="phone-number">
+                           <i class="fas fa-phone-alt"></i>(123) 456-7891
+                      </a>
                  </div>
             </div>
         </section>
@@ -555,5 +625,33 @@
         </div>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+
+            // Toggle mobile menu
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                mobileMenuBtn.classList.toggle('active');
+            });
+
+            // Close mobile menu when a link is clicked
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.classList.remove('active');
+                    }
+                });
+            });
+
+            // Update footer year dynamically
+            const footerText = document.querySelector('.footer-bottom p');
+            if (footerText) {
+                footerText.innerHTML = footerText.innerHTML.replace('2025', new Date().getFullYear());
+            }
+        });
+    </script>
 </body>
 </html>

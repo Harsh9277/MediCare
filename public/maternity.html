@@ -130,9 +130,8 @@
             align-items: center;
         }
 
-        .logo img {
-            height: 50px;
-            margin-right: 10px;
+        .logo {
+            text-decoration: none;
         }
 
         .logo h1 {
@@ -175,6 +174,12 @@
 
         .mobile-menu-btn {
             display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            cursor: pointer;
+            z-index: 1001;
         }
 
         /* Page Header */
@@ -182,7 +187,7 @@
             padding-top: 150px;
             padding-bottom: 80px;
             text-align: center;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            background: linear-gradient(rgba(228, 90, 144, 0.7), rgba(255, 153, 204, 0.7)), url('https://images.unsplash.com/photo-1512295767273-b684ac61d56d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80') no-repeat center center/cover;
             color: white;
         }
         .page-header h1 {
@@ -396,12 +401,79 @@
         @media (max-width: 992px) {
             .maternity-content {
                 flex-direction: column;
+                text-align: center;
             }
         }
         @media (max-width: 768px) {
-            .nav-links { display: none; } /* Simplified for single page */
-            .mobile-menu-btn { display: block; } /* Simplified for single page */
-            .page-header h1 { font-size: 2.5rem; }
+            section {
+                padding: 60px 0;
+            }
+            .page-header {
+                padding-top: 120px;
+                padding-bottom: 60px;
+            }
+            .page-header h1 { 
+                font-size: 2.5rem; 
+            }
+            .page-header p {
+                font-size: 1rem;
+            }
+            .maternity-text h3 {
+                font-size: 1.6rem;
+            }
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            .appointment-contact {
+                padding: 30px 20px;
+            }
+            .appointment-contact h3 {
+                font-size: 1.5rem;
+            }
+            .appointment-contact p {
+                font-size: 1rem;
+            }
+            .appointment-contact .phone-number {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 280px;
+                background: white;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: right 0.4s ease-in-out;
+            }
+            .nav-links.active {
+                right: 0;
+            }
+            .nav-links li {
+                margin: 20px 0;
+            }
+            .nav-links a {
+                font-size: 1.2rem;
+            }
+            .mobile-menu-btn { 
+                display: block; 
+            }
+            .mobile-menu-btn .fa-times {
+                display: none;
+            }
+            .mobile-menu-btn.active .fa-bars {
+                display: none;
+            }
+            .mobile-menu-btn.active .fa-times {
+                display: block;
+            }
+            .footer-container {
+                text-align: left;
+            }
         }
 
     </style>
@@ -423,6 +495,7 @@
                 </ul>
                 <button class="mobile-menu-btn" aria-label="Open Menu">
                     <i class="fas fa-bars"></i>
+                    <i class="fas fa-times"></i>
                 </button>
             </nav>
         </div>
@@ -510,8 +583,8 @@
                  <div class="appointment-contact">
                       <h3>Begin Your Journey With Us</h3>
                       <p>We invite you to tour our facility and meet our team. Call us to schedule a visit.</p>
-                      <a href="tel:123-456-7891" class="phone-number">
-                           <i class="fas fa-phone-alt"></i>(123) 456-7891
+                      <a href="tel:+919565578891" class="phone-number">
+                           <i class="fas fa-phone-alt"></i>+91 9565578891
                       </a>
                  </div>
             </div>
@@ -551,5 +624,33 @@
         </div>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+
+            // Toggle mobile menu
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                mobileMenuBtn.classList.toggle('active');
+            });
+
+            // Close mobile menu when a link is clicked
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.classList.remove('active');
+                    }
+                });
+            });
+
+            // Update footer year dynamically
+            const footerText = document.querySelector('.footer-bottom p');
+            if (footerText) {
+                footerText.innerHTML = footerText.innerHTML.replace('2025', new Date().getFullYear());
+            }
+        });
+    </script>
 </body>
 </html>

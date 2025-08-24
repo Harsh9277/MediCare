@@ -316,41 +316,6 @@
         .delay-1 { transition-delay: 0.2s; }
         .delay-2 { transition-delay: 0.4s; }
 
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 80%;
-                max-width: 300px;
-                height: 100vh;
-                background: white;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                transition: all 0.5s ease;
-                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
-            }
-            .nav-links.active {
-                right: 0;
-            }
-            .nav-links li {
-                margin: 15px 0;
-            }
-            .nav-links a {
-                color: var(--dark-color);
-                font-size: 1.2rem;
-            }
-            .mobile-menu-btn {
-                display: block;
-                z-index: 1001;
-            }
-            .mobile-menu-btn i.close { display: none; }
-            .mobile-menu-btn.active i.open { display: none; }
-            .mobile-menu-btn.active i.close { display: block; }
-        }
-        
         /* NEW STYLES FOR DEPARTMENTS PAGE */
 
         /* Page Banner */
@@ -489,7 +454,10 @@
             color: var(--danger-color);
             text-decoration: none;
         }
-
+        
+        /* --- RESPONSIVE STYLES --- */
+        
+        /* For Tablets and smaller devices */
         @media (max-width: 992px) {
             .department-entry, .department-entry.reverse {
                 flex-direction: column;
@@ -498,7 +466,92 @@
             .department-details h3 {
                 font-size: 1.8rem;
             }
+            .department-image {
+                min-width: 100%;
+                max-height: 300px;
+            }
         }
+        
+        /* For Mobile Phones */
+        @media (max-width: 768px) {
+            section {
+                padding: 60px 0;
+            }
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            .page-banner {
+                padding-top: 140px;
+                padding-bottom: 60px;
+            }
+            .page-banner h1 {
+                font-size: 2.5rem;
+            }
+            .page-banner p {
+                font-size: 1.1rem;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+            }
+            .nav-links.active {
+                right: 0;
+            }
+            .nav-links li {
+                margin: 15px 0;
+            }
+            .nav-links a {
+                color: var(--dark-color);
+                font-size: 1.2rem;
+            }
+            .mobile-menu-btn {
+                display: block;
+                z-index: 1001;
+            }
+            .mobile-menu-btn i.close { display: none; }
+            .mobile-menu-btn.active i.open { display: none; }
+            .mobile-menu-btn.active i.close { display: block; }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-col h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .footer-social {
+                justify-content: center;
+            }
+        }
+        
+        /* For very small devices */
+        @media (max-width: 480px) {
+            .department-entry {
+                padding: 20px;
+            }
+            .department-details h3 {
+                font-size: 1.6rem;
+            }
+            .department-details h4 {
+                font-size: 1.1rem;
+            }
+            .page-banner h1 {
+                font-size: 2rem;
+            }
+        }
+
     </style>
 </head>
 <body>

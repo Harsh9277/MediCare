@@ -130,9 +130,8 @@
             align-items: center;
         }
 
-        .logo img {
-            height: 50px;
-            margin-right: 10px;
+        .logo {
+            text-decoration: none;
         }
 
         .logo h1 {
@@ -175,6 +174,12 @@
 
         .mobile-menu-btn {
             display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            cursor: pointer;
+            z-index: 1001;
         }
 
         /* Page Header */
@@ -396,12 +401,79 @@
         @media (max-width: 992px) {
             .surgery-content {
                 flex-direction: column;
+                text-align: center;
             }
         }
         @media (max-width: 768px) {
-            .nav-links { display: none; } /* Simplified for single page */
-            .mobile-menu-btn { display: block; } /* Simplified for single page */
-            .page-header h1 { font-size: 2.5rem; }
+            section {
+                padding: 60px 0;
+            }
+            .page-header {
+                padding-top: 120px;
+                padding-bottom: 60px;
+            }
+            .page-header h1 { 
+                font-size: 2.5rem; 
+            }
+            .page-header p {
+                font-size: 1rem;
+            }
+            .surgery-text h3 {
+                font-size: 1.6rem;
+            }
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            .appointment-contact {
+                padding: 30px 20px;
+            }
+            .appointment-contact h3 {
+                font-size: 1.5rem;
+            }
+            .appointment-contact p {
+                font-size: 1rem;
+            }
+            .appointment-contact .phone-number {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 280px;
+                background: white;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: right 0.4s ease-in-out;
+            }
+            .nav-links.active {
+                right: 0;
+            }
+            .nav-links li {
+                margin: 20px 0;
+            }
+            .nav-links a {
+                font-size: 1.2rem;
+            }
+            .mobile-menu-btn { 
+                display: block; 
+            }
+            .mobile-menu-btn .close {
+                display: none;
+            }
+            .mobile-menu-btn.active .open {
+                display: none;
+            }
+            .mobile-menu-btn.active .close {
+                display: block;
+            }
+            .footer-container {
+                text-align: left;
+            }
         }
 
     </style>
@@ -422,7 +494,8 @@
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
                 <button class="mobile-menu-btn" aria-label="Open Menu">
-                    <i class="fas fa-bars"></i>
+                    <i class="fas fa-bars open"></i>
+                    <i class="fas fa-times close"></i>
                 </button>
             </nav>
         </div>
@@ -510,8 +583,8 @@
                  <div class="appointment-contact">
                       <h3>Schedule a Surgical Consultation</h3>
                       <p>Contact us today to book an appointment with one of our expert surgeons.</p>
-                      <a href="tel:123-456-7891" class="phone-number">
-                           <i class="fas fa-phone-alt"></i>(123) 456-7891
+                      <a href="tel:+919565578891" class="phone-number">
+                           <i class="fas fa-phone-alt"></i>+91 9565578891
                       </a>
                  </div>
             </div>
@@ -550,6 +623,35 @@
             </div>
         </div>
     </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+
+            // Toggle mobile menu
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                mobileMenuBtn.classList.toggle('active');
+            });
+
+            // Close mobile menu when a link is clicked
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.classList.remove('active');
+                    }
+                });
+            });
+
+            // Update footer year dynamically
+            const footerText = document.querySelector('.footer-bottom p');
+            if (footerText) {
+                footerText.innerHTML = footerText.innerHTML.replace('2025', new Date().getFullYear());
+            }
+        });
+    </script>
 
 </body>
 </html>

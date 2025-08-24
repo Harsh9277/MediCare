@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* All CSS from the original file is included here for consistency */
         /* Global Styles */
         :root {
             --primary-color: #0d6efd;
@@ -102,13 +101,9 @@
             width: 100%;
             z-index: 1000;
             transition: all 0.3s ease;
-            padding: 20px 0;
+            padding: 15px 0;
             background-color: white;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        header.scrolled {
-            padding: 15px 0;
         }
         
         .header-container {
@@ -120,6 +115,7 @@
         .logo {
             display: flex;
             align-items: center;
+            text-decoration: none;
         }
 
         .logo img {
@@ -329,6 +325,7 @@
             align-items: center;
             justify-content: center;
             z-index: 9999;
+            transition: opacity 0.5s ease;
         }
 
         .loader {
@@ -345,7 +342,7 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* START: DOCTOR PROFILE PAGE STYLES */
+        /* DOCTOR PROFILE PAGE STYLES */
 
         .page-header {
             padding-top: 120px;
@@ -356,6 +353,7 @@
         .doctor-profile-section {
             background-color: white;
             padding-bottom: 80px;
+            padding-top: 0;
         }
         
         .profile-grid {
@@ -436,6 +434,8 @@
         .profile-details p {
             margin-bottom: 15px;
             color: #666;
+            display: flex;
+            align-items: center;
         }
         
         .profile-details i {
@@ -509,7 +509,6 @@
             text-align: right;
         }
 
-        /* END: DOCTOR PROFILE PAGE STYLES */
 
         /* Responsive Styles */
         @media (max-width: 992px) {
@@ -536,6 +535,7 @@
                 justify-content: center;
                 transition: all 0.5s ease;
                 box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
             }
 
             .nav-links.active {
@@ -543,7 +543,7 @@
             }
 
             .nav-links li {
-                margin: 15px 0;
+                margin: 20px 0;
             }
 
             .nav-links a {
@@ -555,8 +555,26 @@
                 display: block;
                 z-index: 1001;
             }
-        }
 
+            .mobile-menu-btn .close {
+                display: none;
+            }
+
+            .mobile-menu-btn.active .open {
+                display: none;
+            }
+            .mobile-menu-btn.active .close {
+                display: block;
+            }
+
+            .profile-sidebar h3 {
+                font-size: 1.6rem;
+            }
+
+            .profile-main-content h2 {
+                font-size: 1.8rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -570,13 +588,12 @@
 
     <header>
         <div class="container header-container">
-            <div class="logo">
+            <a href="index.html" class="logo">
                 <img src="img/logo.jpeg" alt="MediCare Hospital Logo">
                 <h1>MediCare</h1>
-            </div>
+            </a>
             <nav>
                 <ul class="nav-links">
-                    <!-- Updated links to point to index.html sections -->
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="services.html">Services</a></li>
@@ -585,7 +602,8 @@
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
                 <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
+                    <i class="fas fa-bars open"></i>
+                    <i class="fas fa-times close"></i>
                 </button>
             </nav>
         </div>
@@ -596,7 +614,6 @@
             <div class="container">
                 <div class="section-title">
                     <h2>Doctor Profile</h2>
-                    <p>Meet Our Expert Orthopedic Surgeon</p>
                 </div>
             </div>
         </section>
@@ -611,9 +628,9 @@
                         <h3>Dr. Robert Williams</h3>
                         <p class="specialty">Orthopedic Surgeon</p>
                         <div class="profile-social">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                         <div class="profile-details">
                             <p><i class="fas fa-bone"></i> <strong>Department:</strong> Orthopedics</p>
@@ -664,10 +681,10 @@
                     <h3>About Us</h3>
                     <p>MediCare Hospital is a leading healthcare provider dedicated to delivering exceptional medical care with compassion and innovation since 1998.</p>
                     <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -714,11 +731,23 @@
             }, 500);
         });
 
-        // Mobile Menu
+        // Mobile Menu Toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
-        mobileMenuBtn.addEventListener('click', () => {
+
+        mobileMenuBtn.addEventListener('click', function() {
+            this.classList.toggle('active');
             navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    mobileMenuBtn.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
         });
 
         // Back to Top Button

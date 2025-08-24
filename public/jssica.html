@@ -555,6 +555,62 @@
                 display: block;
                 z-index: 1001;
             }
+            
+            /* ADDED RESPONSIVE ADJUSTMENTS */
+            section {
+                padding: 60px 0;
+            }
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            .logo h1 {
+                font-size: 1.6rem;
+            }
+            .logo img {
+                height: 45px;
+            }
+            .profile-main-content h2 {
+                font-size: 2rem;
+            }
+            .footer {
+                padding-top: 60px;
+            }
+        }
+
+        /* ADDED FOR SMALLER MOBILE DEVICES */
+        @media (max-width: 576px) {
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            .profile-main-content h2 {
+                font-size: 1.7rem;
+            }
+            .profile-sidebar h3 {
+                font-size: 1.6rem;
+            }
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+            .footer-col {
+                text-align: center;
+            }
+            .footer-col h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .footer-links a {
+                justify-content: center;
+            }
+            .footer-social {
+                justify-content: center;
+            }
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 20px;
+                right: 20px;
+            }
         }
 
     </style>

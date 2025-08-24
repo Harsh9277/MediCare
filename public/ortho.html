@@ -129,6 +129,10 @@
             justify-content: space-between;
             align-items: center;
         }
+        
+        .logo {
+            text-decoration: none;
+        }
 
         .logo img {
             height: 50px;
@@ -175,6 +179,12 @@
 
         .mobile-menu-btn {
             display: none;
+            background: none;
+            border: none;
+            color: var(--dark-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
         }
 
         /* Page Header */
@@ -396,12 +406,84 @@
         @media (max-width: 992px) {
             .orthopedics-content {
                 flex-direction: column;
+                text-align: center;
+            }
+             .orthopedics-img {
+                margin-bottom: 30px;
             }
         }
         @media (max-width: 768px) {
-            .nav-links { display: none; } /* Simplified for single page */
-            .mobile-menu-btn { display: block; } /* Simplified for single page */
+            section {
+                padding: 60px 0;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 20px 0;
+            }
+             .nav-links a {
+                font-size: 1.2rem;
+            }
+
+            .mobile-menu-btn { 
+                display: block; 
+            }
+            
+            .page-header {
+                padding-top: 120px;
+                padding-bottom: 60px;
+            }
             .page-header h1 { font-size: 2.5rem; }
+
+            .section-title h2 { font-size: 2rem; }
+
+            .orthopedics-text h3 { font-size: 1.8rem; }
+            
+            .appointment-contact { padding: 30px; }
+            .appointment-contact h3 { font-size: 1.8rem; }
+            .appointment-contact p { font-size: 1rem; }
+            .appointment-contact .phone-number { font-size: 1.8rem; }
+
+            .footer-col {
+                text-align: center;
+            }
+            .footer-col h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 { font-size: 2rem; }
+            .page-header p { font-size: 1rem; }
+            .appointment-contact .phone-number { font-size: 1.5rem; }
+            .feature-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .feature-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
         }
 
     </style>
@@ -508,11 +590,11 @@
         <section id="contact">
             <div class="container">
                  <div class="appointment-contact">
-                      <h3>Begin Your Recovery Journey</h3>
-                      <p>Don't let pain hold you back. Schedule a consultation with our orthopedic specialists today.</p>
-                      <a href="tel:123-456-7891" class="phone-number">
-                           <i class="fas fa-phone-alt"></i>(123) 456-7891
-                      </a>
+                        <h3>Begin Your Recovery Journey</h3>
+                        <p>Don't let pain hold you back. Schedule a consultation with our orthopedic specialists today.</p>
+                        <a href="tel:123-456-7891" class="phone-number">
+                             <i class="fas fa-phone-alt"></i>(123) 456-7891
+                        </a>
                  </div>
             </div>
         </section>
@@ -550,6 +632,20 @@
             </div>
         </div>
     </footer>
+    
+    <script>
+        // Mobile Menu
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Current year for footer
+        // This will find '2025' and replace it with the current year.
+        document.querySelector('.footer-bottom p').innerHTML = document.querySelector('.footer-bottom p').innerHTML.replace('2025', new Date().getFullYear());
+    </script>
 
 </body>
 </html>

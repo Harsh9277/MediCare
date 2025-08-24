@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* All the CSS from your original file goes here */
-        /* For brevity, it's omitted in this display but should be included */
         /* Global Styles */
         :root {
             --primary-color: #0d6efd;
@@ -121,6 +119,7 @@
             z-index: 1000;
             transition: all 0.3s ease;
             padding: 20px 0;
+            background-color: transparent; /* Changed for scroll effect */
         }
 
         header.scrolled {
@@ -138,6 +137,7 @@
         .logo {
             display: flex;
             align-items: center;
+            text-decoration: none;
         }
 
         .logo img {
@@ -190,7 +190,7 @@
             transition: width 0.3s ease;
         }
 
-        .nav-links a:hover::after {
+        .nav-links a:hover::after, .nav-links a.active::after {
             width: 100%;
         }
 
@@ -201,6 +201,7 @@
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
+            transition: color 0.3s ease;
         }
 
         header.scrolled .mobile-menu-btn {
@@ -393,7 +394,7 @@
         .footer-links a i {
             font-size: 0.8rem;
         }
-       
+        
         .footer-social {
             display: flex;
             gap: 15px;
@@ -427,7 +428,7 @@
             color: white;
             margin-bottom: 15px;
         }
-      
+    
         .footer-newsletter .btn {
             width: 100%;
         }
@@ -446,6 +447,32 @@
         .footer-bottom p a {
             color: var(--secondary-color);
             text-decoration: none;
+        }
+        
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Back to Top Button */
@@ -475,7 +502,32 @@
         }
         
         /* Responsive Styles */
+        @media (max-width: 992px) {
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+
         @media (max-width: 768px) {
+            section {
+                padding: 60px 0;
+            }
+            .page-header {
+                padding: 140px 0 60px;
+            }
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            .service-content h3 {
+                font-size: 1.3rem;
+            }
+
             .nav-links {
                 position: fixed;
                 top: 0;
@@ -521,24 +573,48 @@
                 display: block;
             }
         }
+        
+        @media (max-width: 576px) {
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            .page-header p {
+                font-size: 1rem;
+            }
+            .footer-col {
+                text-align: center;
+            }
+            .footer-col h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .footer-social, .footer-links a {
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
+
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
     <a href="#" class="back-to-top">
         <i class="fas fa-arrow-up"></i>
     </a>
 
     <header>
         <div class="container header-container">
-            <div class="logo">
-                <img src="img/logo.jpeg" alt="MediCare Hospital Logo">
+            <a href="index.html" class="logo">
+                <img src="img/logo.jpeg" alt="MediCare Hospital Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x50/0d6efd/ffffff?text=MediCare';">
                 <h1>MediCare</h1>
-            </div>
+            </a>
             <nav>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
                     <li><a href="doctors.html">Doctors</a></li>
                     <li><a href="departments.html">Departments</a></li>
                     <li><a href="/blog">Blog</a></li>
@@ -654,7 +730,7 @@
                     <div class="service-content">
                         <h3>Laboratory Services</h3>
                         <p>Our fully automated laboratory provides a wide range of tests, ensuring quick and accurate results for pathology, microbiology, and biochemistry.</p>
-                        <a href="laboratory.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                        <a href="pathology.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 <div class="service-card">
@@ -723,6 +799,17 @@
     </footer>
 
     <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.querySelector('.preloader');
+            if (preloader) {
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => preloader.style.display = 'none', 500);
+                }, 500);
+            }
+        });
+        
         // Mobile Menu Toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
@@ -741,10 +828,9 @@
         });
 
         // Header scroll effect
-        // Set header to scrolled by default on subpages
         const header = document.querySelector('header');
-        header.classList.add('scrolled');
-        // Still keep the scroll logic for pages that might not have a banner
+        // Logic to handle both transparent and solid headers based on page.
+        // For services page, it starts transparent.
         window.addEventListener('scroll', function() {
             header.classList.toggle('scrolled', window.scrollY > 50);
         });
