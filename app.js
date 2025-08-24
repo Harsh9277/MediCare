@@ -20,6 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from the 'public' directory
+// Yeh line apne aap public folder se index.html ko dhoondh legi
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Session Configuration
@@ -36,15 +37,14 @@ const adminRoutes = require('./routes/admin');
 
 // Use Routes
 app.use('/blog', blogRoutes);
-
-console.log("DEBUG: Loading admin routes..."); // <-- YEH LINE ADD KI HAI
 app.use('/admin', adminRoutes);
-console.log("DEBUG: Admin routes loaded successfully."); // <-- YEH LINE BHI ADD KI HAI
 
-// Route for the main static homepage
+// Route for the main static homepage - ISKI AB ZAROORAT NAHI HAI
+/*
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+*/
 
 app.listen(PORT, () => {
     console.log(`Server is running!`);
