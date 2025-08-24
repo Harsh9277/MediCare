@@ -36,7 +36,10 @@ const adminRoutes = require('./routes/admin');
 
 // Use Routes
 app.use('/blog', blogRoutes);
+
+console.log("DEBUG: Loading admin routes..."); // <-- YEH LINE ADD KI HAI
 app.use('/admin', adminRoutes);
+console.log("DEBUG: Admin routes loaded successfully."); // <-- YEH LINE BHI ADD KI HAI
 
 // Route for the main static homepage
 app.get('/', (req, res) => {

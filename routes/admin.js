@@ -1,4 +1,5 @@
 const express = require('express');
+console.log("DEBUG: routes/admin.js file is being read!"); // <-- YEH LINE ADD KI HAI
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const BlogPost = require('../models/BlogPost');
@@ -17,6 +18,7 @@ function isAdmin(req, res, next) {
 
 // GET /admin/login - Show login page
 router.get('/login', (req, res) => {
+    console.log("DEBUG: Request reached /admin/login route."); // <-- YEH LINE ADD KI HAI
     res.render('admin/login');
 });
 
